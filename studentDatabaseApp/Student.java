@@ -7,7 +7,7 @@ public class Student {
     private String lastName;
     private int year;
     private String studentID;
-    private String courses = null;
+    private ArrayList<String> courses = new ArrayList<String>();
     private int tuitionBalance = 0;
     private static int costOfCourse = 600;
     private static int idCount = 1000;
@@ -40,7 +40,7 @@ public class Student {
             Scanner in = new Scanner(System.in);
             String course = in.nextLine();
             if (!course.equals("Q")) {
-                courses = courses + "\n " + course;
+                courses.add(course);
                 tuitionBalance = tuitionBalance + costOfCourse;
             } else { break; }
         } while (1 != 0);
@@ -63,12 +63,22 @@ public class Student {
         viewBalance();
     }
 
+    private String toString(ArrayList<String> list) {
+        StringBuilder sb = new StringBuilder();
+        for (String course : list) {
+            sb.append(" ");
+            sb.append(course);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     // Print status of student
     public String showInfo(){
         return firstName + " " + lastName + 
         "\nGrade Level: " + year +
         "\nStudent ID: " + studentID +
-        "\nCourses Enrolled: " + courses + 
+        "\nCourses Enrolled: \n" + toString(courses) + 
         "\nBalance : " + tuitionBalance;
     }
 }
